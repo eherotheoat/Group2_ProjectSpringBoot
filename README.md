@@ -1,4 +1,8 @@
 # Group2_ProjectSpringBoot
+
+URL สำหรับ run project
+http://localhost:8080/project/
+
 กลุ่ม 2
 
 นาย กิตติภูมิ เพ็งยิ้ม 6152300258
