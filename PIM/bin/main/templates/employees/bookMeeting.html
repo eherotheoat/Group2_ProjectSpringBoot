@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+	crossorigin="anonymous">
+
+<title>book Meeting</title>
+</head>
+<body>
+
+	<div class="container">
+		<nav class="navbar navbar-dark bg-dark">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="/project">Log out</a>&nbsp;
+			</div>
+		</nav>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-10">
+				<p class="fs-1">จองห้องประชุม</p>
+
+			</div>
+			<div class="col-2">
+				<br>
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+					fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+			  <path
+						d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+			</svg>
+				<a> UserName :</a> <a th:text="${whoLogin.name}"> error </a>
+			</div>
+		</div>
+		<br>
+	</div>
+	<hr>
+	<div>
+		<form class="container" th:action="@{/project/fine}" method="POST"
+			accept-charset="utf-8">
+			<div class="mb-3">
+				<h2>
+					<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+						fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+				  <path
+							d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+				</svg>
+					เลือกวันและเวลา
+				</h2>
+				<hr>
+				<br> &nbsp; <label for="exampleInputEmail1" class="form-label">เลือกวันเเละเวลาในการจอง
+				</label> <input class="form-control" id="date" type="datetime-local"
+					name="date" required="" value="2011-08-19T13:45:00"> <br>
+				<div class="d-grid gap-2">
+					<button type="submit" class="btn btn-outline-dark">ค้นหา</button>
+				</div>
+			</div>
+
+		</form>
+		<hr>
+	</div>
+
+	<br>
+
+	<div class="container">
+		<h4>
+			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+				fill="currentColor" class="bi bi-door-closed" viewBox="0 0 16 16">
+			  <path
+					d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z" />
+			  <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z" />
+			</svg>
+			&nbsp; <a>ห้องที่สามารถจองในวันที่ : </a> <a th:text="${canroom}"></a>
+		</h4>
+	</div>
+
+	<br>
+	<div class="container" th:each="Room : ${room}">
+
+		<div class="accordion accordion-flush" id="accordionFlushExample">
+			<a class="btn btn-outline-dark"
+				th:href="'/project/bookRoom/' + ${Room.id}" method="GET"> <svg
+					xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+					fill="currentColor" class="bi bi-door-open" viewBox="0 0 16 16">
+					  <path
+						d="M8.5 10c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z" />
+					  <path
+						d="M10.828.122A.5.5 0 0 1 11 .5V1h.5A1.5 1.5 0 0 1 13 2.5V15h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117zM11.5 2H11v13h1V2.5a.5.5 0 0 0-.5-.5zM4 1.934V15h6V1.077l-6 .857z" />
+					</svg>
+			</a> &nbsp; <a th:text="${Room.branch}"></a> &nbsp; <a
+				th:text="${Room.id}"></a> &nbsp; <a>:&nbsp; อาคาร</a> <a
+				th:text="${Room.building}"></a> &nbsp; <a>&nbsp; ชั้น</a> <a
+				th:text="${Room.floor}"></a> &nbsp; <a> <svg
+					xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+					fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+				  <path
+						d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+				  <path fill-rule="evenodd"
+						d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
+				  <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+				</svg>
+			</a> <a th:text="${Room.capacity}"></a> &nbsp; <br> <br>
+		</div>
+
+		<hr>
+	</div>
+	<hr>
+	<br>
+	<div class="container">
+		<h4>
+
+			<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
+				fill="currentColor" class="bi bi-file-earmark-medical"
+				viewBox="0 0 16 16">
+		  <path
+					d="M7.5 5.5a.5.5 0 0 0-1 0v.634l-.549-.317a.5.5 0 1 0-.5.866L6 7l-.549.317a.5.5 0 1 0 .5.866l.549-.317V8.5a.5.5 0 1 0 1 0v-.634l.549.317a.5.5 0 1 0 .5-.866L8 7l.549-.317a.5.5 0 1 0-.5-.866l-.549.317V5.5zm-2 4.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 2a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5z" />
+		  <path
+					d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z" />
+		</svg>
+			&nbsp; <a>ห้องที่ถูกจอง</a>
+		</h4>
+	</div>
+	<br>
+
+	<div class="container" th:each="roombooks : ${roombook}">
+
+		<div class="accordion accordion-flush" id="accordionFlushExample">
+			<a>รายละเอียดห้อง : </a> <a th:text="${roombooks.room.branch}"></a>
+			&nbsp; <a th:text="${roombooks.room.id}"></a> &nbsp; <a> : อาคาร</a>&nbsp;
+			<a th:text="${roombooks.room.building}"></a>&nbsp; <a> : ชั้น</a>&nbsp;
+			<a th:text="${roombooks.room.floor}"></a>&nbsp;
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+				fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+				  <path
+					d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+				  <path fill-rule="evenodd"
+					d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
+				  <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+			</svg>
+			&nbsp; <a th:text="${roombooks.room.capacity}"></a> <br> <a>รายละเอียดผู้จอง
+				: </a> <a>UserName : </a> <a th:text="${roombooks.employees.name}"></a>
+			<br> <a>รายละเอียดวันเวลาจอง : </a> <a
+				th:text="${roombooks.bookDate}"></a> <br> <br>
+		</div>
+
+		<hr>
+	</div>
+
+
+
+	<!-- Optional JavaScript; choose one of the two!   <a th:text="${whoLogin.name}"> error </a> -->
+
+	<!-- Option 1: Bootstrap Bundle with Popper -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+		crossorigin="anonymous"></script>
+
+	<!-- Option 2: Separate Popper and Bootstrap JS -->
+	<!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+    -->
+</body>
+</html>
